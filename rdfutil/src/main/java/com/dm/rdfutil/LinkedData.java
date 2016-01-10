@@ -15,8 +15,7 @@ public class LinkedData {
 public String GetRdf()    
 {       
       byte[] rdfBytes=null;
-        try {       
-           
+        try {
             String personURI    = "http://somewhere/JohnSmith";
             String fullName     = "John Smith";
             Model model = ModelFactory.createDefaultModel();
@@ -32,10 +31,9 @@ public String GetRdf()
             model.write(ou,"TURTLE");            
             output.close();
         } catch (IOException ex) {
-           return new String("Error"); 
+           return ex.getMessage(); 
         }
-        return new String(rdfBytes);       
-        
+        return new String(rdfBytes);
      
 }
     
