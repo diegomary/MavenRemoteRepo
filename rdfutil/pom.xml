@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.dm</groupId>
     <artifactId>rdfutil</artifactId>
-    <version>1.2</version>
+    <version>1.5</version>
     <packaging>jar</packaging>     
     <distributionManagement>        
         <repository>            
@@ -52,27 +52,19 @@
                     maven-javadoc-plugin
                 </artifactId>
                 <version>2.10.3</version>
-            </plugin>
+            </plugin> 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>2.4.2</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.dm.rdfutil.Startup</mainClass>
-                                </transformer>
-                            </transformers>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin> 
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.dm.rdfutil.Startup</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <properties>
