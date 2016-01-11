@@ -4,49 +4,58 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.sparql.vocabulary.FOAF;
 import org.apache.jena.vocabulary.VCARD;
 import org.apache.jena.vocabulary.DC;
 import org.apache.jena.vocabulary.DB;
 
-// To see plugin version go to
-//https://maven.apache.org/plugins/
+
 
 public class LinkedData {
     
     private Model model;
     private Resource ldResource;
-    
+  
     public LinkedData(String urlTitle){         
-     model = ModelFactory.createDefaultModel();
-     ldResource = model.createResource(urlTitle);     
+     model = ModelFactory.createDefaultModel();      
+     ldResource = model.createResource(urlTitle);
     }     
-     
+    
+    public void AddPrefix(NsPrefix prefix)
+    {    
+     model.setNsPrefix(prefix.Prefix, prefix.Url);
+    }
+         
+    public void AddPrefixedResource(String resourceUrl, String NsPrefixUrl, String vocabularyTerm)
+    {    
+     ldResource.addProperty(model.createProperty(NsPrefixUrl,vocabularyTerm), model.createResource(resourceUrl));    
+    }
+    
      public void AddDCProperty(String property,DCTERMS dc)
      {  
         switch (dc)            
         {            
             case TITLE:
-                  ldResource.addProperty(DC.title, property);                
+                 ldResource.addProperty(DC.title, model.createLiteral(property));   
                 break;
             case COVERAGE:
-                 ldResource.addProperty(DC.coverage, property);    
+                 ldResource.addProperty(DC.coverage, model.createLiteral(property));    
                 break;
             case CREATOR:
-                 ldResource.addProperty(DC.creator, property);    
+                 ldResource.addProperty(DC.creator, model.createLiteral(property));    
                 break;
             case DATE:
-                 ldResource.addProperty(DC.date, property);    
+                 ldResource.addProperty(DC.date, model.createLiteral(property));    
                 break;
             case DESCRIPTION:
-                 ldResource.addProperty(DC.description, property);    
+                 ldResource.addProperty(DC.description, model.createLiteral(property));    
                 break;                
             case ID:
-                 ldResource.addProperty(DC.identifier, property);    
+                 ldResource.addProperty(DC.identifier, model.createLiteral(property));    
                 break;               
             default:
                 break;
-        }       
-          
+        }      
      }
    
     public String GetRdf()    
@@ -63,6 +72,8 @@ public class LinkedData {
         OutputStream ou = new FileOutputStream(filePath);
         model.write(ou,"RDF/XML");            
         ou.close();
+        
+      
     }
 
     
