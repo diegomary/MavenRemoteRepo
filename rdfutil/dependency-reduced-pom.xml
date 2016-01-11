@@ -4,7 +4,7 @@
   <groupId>com.dm</groupId>
   <artifactId>rdfutil</artifactId>
   <name>rdfutil</name>
-  <version>1.2</version>
+  <version>1.0</version>
   <build>
     <extensions>
       <extension>
@@ -35,21 +35,25 @@
         <version>2.10.3</version>
       </plugin>
       <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>com.dm.rdfutil.Startup</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>2.4.2</version>
+        <version>2.4.1</version>
         <executions>
           <execution>
             <phase>package</phase>
             <goals>
               <goal>shade</goal>
             </goals>
-            <configuration>
-              <transformers>
-                <transformer>
-                  <mainClass>com.dm.rdfutil.Startup</mainClass>
-                </transformer>
-              </transformers>
-            </configuration>
           </execution>
         </executions>
       </plugin>
