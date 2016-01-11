@@ -9,7 +9,6 @@ import com.dm.rdfutil.DCTERMS;
 import com.dm.rdfutil.LinkedData;
 import com.dm.rdfutil.NsPrefix;
 import java.util.Date;
-
 /**
  *
  * @author Diego

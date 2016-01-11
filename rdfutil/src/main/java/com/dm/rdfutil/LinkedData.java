@@ -2,12 +2,8 @@ package com.dm.rdfutil;
 import java.io.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.sparql.vocabulary.FOAF;
-import org.apache.jena.vocabulary.VCARD;
 import org.apache.jena.vocabulary.DC;
-import org.apache.jena.vocabulary.DB;
 
 
 
@@ -71,8 +67,7 @@ public class LinkedData {
     {    
         OutputStream ou = new FileOutputStream(filePath);
         model.write(ou,"RDF/XML");            
-        ou.close();
-        
+        ou.close();      
       
     }
 
