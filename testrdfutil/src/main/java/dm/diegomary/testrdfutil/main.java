@@ -1,14 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package dm.diegomary.testrdfutil;
 
 import com.dm.rdfutil.DCTERMS;
 import com.dm.rdfutil.LinkedData;
 import com.dm.rdfutil.NsPrefix;
+import java.io.IOException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Diego
@@ -18,7 +17,7 @@ public class main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
         LinkedData ld = new LinkedData();
         ld.AddPrefix(new NsPrefix("wbs", "http://webnames.com/"));
       
@@ -38,6 +37,12 @@ public class main {
         
         ld.SetCurrentResource("http://dmm888.com/mariawebsite");
         ld.AddPrefixedProperty("wbs", "spaceavailable","2gb");
+        
+        try {
+            ld.WriteRdfFile("d://test.rdf");
+        } catch (IOException ex) {
+            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         System.out.print(ld.GetRdf());
     }

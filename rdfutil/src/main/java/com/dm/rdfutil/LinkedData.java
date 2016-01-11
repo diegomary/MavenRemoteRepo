@@ -5,17 +5,27 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.DC;
 
-
+/** 
+ * this class allows
+ * @author Diego
+ */
 public class LinkedData {
     
     public Model model;
     private Resource ldResource;
     
-
+    /**
+     *this is the constructor
+     */
     public LinkedData(){         
      model = ModelFactory.createDefaultModel();
     }
     
+    /**
+     *this is the prefix adder
+     * @param prefix
+     * The prefix is the prefix
+     */
     public void AddPrefix(NsPrefix prefix)
     {    
      model.setNsPrefix(prefix.Prefix, prefix.Url);
