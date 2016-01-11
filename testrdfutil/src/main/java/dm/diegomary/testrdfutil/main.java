@@ -19,13 +19,26 @@ public class main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        LinkedData ld = new LinkedData("http://dmm888.com/diegowebsite");        
-        ld.AddPrefix(new NsPrefix("DM88", "http://dmm888.com/"));        
-        ld.AddDCProperty("titleofthewebsite", DCTERMS.TITLE);
-        ld.AddDCProperty("id12abdf", DCTERMS.ID);
-        ld.AddDCProperty(new Date().toString(), DCTERMS.DATE);        
-        ld.AddDCProperty("DMM incorporated", DCTERMS.CREATOR);
-        ld.AddPrefixedResource("https://profiles.google.com/116142573163051163758/about", "http://dmm888.com/", "owner");
+        LinkedData ld = new LinkedData();
+        ld.AddPrefix(new NsPrefix("wbs", "http://webnames.com/"));
+      
+        ld.CreateResource("http://dmm888.com/diegowebsite");
+        ld.AddPrefixedResource("https://profiles.google.com/116142573163051163758/about", "wbs", "owner");
+        ld.AddPrefixedProperty("wbs", "webprovider","aruba");
+        ld.AddPrefixedProperty("wbs", "ftpenabled","true");
+        
+        ld.CreateResource("http://dmm888.com/mariawebsite");
+        ld.AddPrefixedResource("http://mariaburlando.com", "wbs", "owner");
+        ld.AddPrefixedProperty("wbs", "webprovider","amazon");
+        ld.AddPrefixedProperty("wbs", "ftpenabled","false");
+        
+        ld.SetCurrentResource("http://dmm888.com/diegowebsite");
+        ld.AddPrefixedProperty("wbs", "spaceavailable","unlimited");
+        
+        
+        ld.SetCurrentResource("http://dmm888.com/mariawebsite");
+        ld.AddPrefixedProperty("wbs", "spaceavailable","2gb");
+        
         System.out.print(ld.GetRdf());
     }
     

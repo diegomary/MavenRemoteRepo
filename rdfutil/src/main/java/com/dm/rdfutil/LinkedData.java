@@ -6,26 +6,41 @@ import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.DC;
 
 
-
 public class LinkedData {
     
-    private Model model;
+    public Model model;
     private Resource ldResource;
-  
-    public LinkedData(String urlTitle){         
-     model = ModelFactory.createDefaultModel();      
-     ldResource = model.createResource(urlTitle);
-    }     
+    
+
+    public LinkedData(){         
+     model = ModelFactory.createDefaultModel();
+    }
     
     public void AddPrefix(NsPrefix prefix)
     {    
      model.setNsPrefix(prefix.Prefix, prefix.Url);
     }
-         
-    public void AddPrefixedResource(String resourceUrl, String NsPrefixUrl, String vocabularyTerm)
+    
+    public void CreateResource(String urlTitle)
     {    
-     ldResource.addProperty(model.createProperty(NsPrefixUrl,vocabularyTerm), model.createResource(resourceUrl));    
+     ldResource = model.createResource(urlTitle);    
+    }    
+    
+    public void SetCurrentResource(String urlTitle)
+    {    
+        ldResource=model.getResource(urlTitle);
+    }   
+    
+         
+    public void AddPrefixedResource(String resourceUrl, String NsPrefix, String vocabularyTerm)
+    {    
+     ldResource.addProperty(model.createProperty(model.getNsPrefixURI(NsPrefix),vocabularyTerm), model.createResource(resourceUrl));    
     }
+    
+     public void AddPrefixedProperty(String NsPrefix, String vocabularyTerm,String property)
+     {         
+        ldResource.addProperty(model.createProperty(model.getNsPrefixURI(NsPrefix),vocabularyTerm),property);
+     }
     
      public void AddDCProperty(String property,DCTERMS dc)
      {  
